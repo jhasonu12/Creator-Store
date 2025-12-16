@@ -1,3 +1,12 @@
+"use client";
+
+import { motion } from 'framer-motion';
+
+const item = {
+  hidden: { opacity: 0, y: 12 },
+  visible: (delay = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.55, delay } }),
+};
+
 export default function Testimonials() {
   const testimonials = [
     {
@@ -24,23 +33,23 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="py-20 sm:py-32 bg-white">
+    <motion.section className="py-20 sm:py-32 bg-white" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.18 }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
+          <motion.h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-2" variants={item} custom={0.02}>
             Why creators <span className="text-red-500">❤️</span> Apna Store
-          </h2>
-          <p className="text-gray-600 text-base sm:text-lg">
+          </motion.h2>
+          <motion.p className="text-gray-600 text-base sm:text-lg" variants={item} custom={0.08}>
             Don't just take our word for it. Hear from creators who have transformed their
             businesses.
-          </p>
+          </motion.p>
         </div>
 
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="p-6 bg-gray-50 rounded-xl border border-gray-200">
+            <motion.div key={index} className="p-6 bg-gray-50 rounded-xl border border-gray-200" variants={item} custom={index * 0.08}>
               {/* Avatar */}
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
@@ -54,10 +63,10 @@ export default function Testimonials() {
 
               {/* Quote */}
               <p className="text-gray-700 text-sm leading-relaxed">"{testimonial.quote}"</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
